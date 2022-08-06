@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+    crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap");
+
+    :root {
+      --primary: rgb(53, 28, 4);
+    }
+
+    * {
+      box-sizing: border-box;
+      outline: 0;
+      color: white;
+      font-family: "Ubuntu", sans-serif;
+    }
+
+    h1,
+    p {
+      text-align: center;
+      margin: 30px;
+
+
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background: black;
+    }
+
+    .container {
+      background-color: black;
+      margin-top: 40px;
+      padding: 20px 40px;
+      border-radius: 10px;
+    }
+
+    form input,
+    form label,
+    form button {
+      display: block;
+      width: 100%;
+      margin-bottom: 10px;
+      font-size: 30px;
+    }
+
+    form input {
+      font-size: 24px;
+      height: 50px;
+      padding: 0 20px;
+      color: black;
+    }
+
+    form input:focus {
+      outline: 1px solid rgb(0, 247, 255);
+    }
+
+    form button {
+      border: none;
+      background-color: black;
+      margin-top: 15px;
+      padding: 40px;
+    }
+
+    span {
+      margin-left: 13%;
+    }
+
+    #tr {
+      border: 0px;
+      border-style: none;
+
+
+    }
+  </style>
+</head>
+
+<body class="bg-dark">
+
+  <div class="container ">
+    <h1>Calcule seu IMC<span>(+18)</span></h1>
+    <hr>
+    <table class="table">
+      <tr>
+        <th>IMC</th>
+        <th>Resultado</th>
+      </tr>
+      <tr class="" id="a1">
+        <td>Menos do que 18,5</td>
+        <td>Abaixo do peso</td>
+      </tr>
+      <tr id="a2">
+        <td>Entre 18,5 e 24,9</td>
+        <td>Peso normal</td>
+      </tr>
+      <tr id="a3">
+        <td>Entre 25 e 29.9</td>
+        <td>Sobrepeso</td>
+      </tr>
+      <tr id="a4">
+        <td>Entre 30 e 34,9</td>
+        <td>Obesidade grau 1</td>
+      </tr>
+      <tr id="a5">
+        <td>Entre 35 e 39,9</td>
+        <td>Obesidade grau 2</td>
+      </tr>
+      <tr id="a6">
+        <td>Mais doque 40</td>
+        <td>Obesidade grau 3</td>
+      </tr>
+    </table>
+
+    <form id="form" name="formulario" action="">
+      <!--
+         <label for="input-teste-1">Label teste #1</label>
+         <input type="text" id="input-teste-1">
+         
+         <label for="input-teste-2">Label teste #2</label>
+         <input type="password" id="input-teste-2">
+
+         <label for="input-teste-3">Label teste #3</label>
+         <input type="email" id="input-teste-3"> -->
+
+      <h2 class="border p-2 w-3" id="resultado">IMC:</h2>
+
+      <label for="input-teste-4">Peso:</label>
+      <input type="number" id="input-teste-4" placeholder="KG:">
+
+      <label for="input-teste-4">Altura:</label>
+      <input type="number" id="input-teste-5" placeholder="0.0">
+
+      <!-- <button class="btn btn-dark bg-dark">Enviar</button> -->
+
+    </form>
+  </div>
+
+  <script>/*
+IMC = peso / ( altura x altura )
+⚠
+⚪
+ 
+ 
+ 
+*/
+    function a() {
+      var form = document.querySelector("#form");
+
+      y = $("#input-teste-4").keyup(function () {
+        x = true;
+        init();
+      });
+
+      x = $("#input-teste-5").keyup(function () {
+        y = true;
+        init();
+      });
+
+      x = false;
+      y = false;
+
+      function init() {
+        if (x & y) {
+          calcular();
+        }
+      }
+
+      form.addEventListener("submit", (event) => {
+        event.preventDefault();
+      });
+
+      function calcular() {
+        var a1 = document.getElementById("a1");
+        var a2 = document.getElementById("a2");
+        var a3 = document.getElementById("a3");
+        var a4 = document.getElementById("a4");
+        var a5 = document.getElementById("a5");
+        var a6 = document.getElementById("a6");
+
+        var peso = $("#input-teste-4").val();
+
+        var altura = $("#input-teste-5").val();
+
+        var resultado = document.getElementById("resultado");
+
+        imc = peso / (altura * altura);
+        result = Object.assign(imc);
+        console.log(result);
+        result = Number(result);
+
+        a1.style = `border-style: none;`;
+        a2.style = `border-style: none;`;
+        a3.style = `border-style: none;`;
+        a4.style = `border-style: none;`;
+        a5.style = `border-style: none;`;
+        a6.style = `border-style: none;`;
+
+        if (result < 0.1 || result > 100000 || false || NaN) {
+          resultado.innerHTML = `IMC:`;
+        } else if (result < 18.5) {
+          resultado.innerHTML = `IMC: ${result.toFixed(2)}`;
+          a1.style = `border: 5px;
+          border-style: solid;
+          border-color: white;
+          border-radius: 10%;`;
+        } else if (result <= 24.9) {
+          resultado.innerHTML = `IMC: ${result.toFixed(2)}`;
+          a2.style = `border: 5px;
+          border-style: solid;
+          border-color: white;
+          border-radius: 10%;`;
+        } else if (result <= 29.9) {
+          resultado.innerHTML = `IMC: ${result.toFixed(2)}`;
+          a3.style = `border: 5px;
+          border-style: solid;
+          border-color: white;
+          border-radius: 10%;`;
+        } else if (result <= 34.9) {
+          resultado.innerHTML = `IMC: ${result.toFixed(2)}`;
+          a4.style = `border: 5px;
+          border-style: solid;
+          border-color: white;
+          border-radius: 10%;`;
+        } else if (result >= 39.9) {
+          resultado.innerHTML = `IMC: ${result.toFixed(2)}`;
+          a5.style = `border: 5px;
+          border-style: solid;
+          border-color: white;
+          border-radius: 10%;`;
+        } else if (result < 39.9) {
+          resultado.innerHTML = `IMC: ${result.toFixed(2)}`;
+          a6.style = `border: 5px;
+          border-style: solid;
+          border-color: white;
+          border-radius: 10%;`;
+        } else {
+          resultado.innerHTML = `IMC: ERROR`;
+        }
+
+        result = 0;
+
+        console.log(result);
+
+        console.log(imc);
+      }
+    }
+    a();
+  </script>
+</body>
+
+</html>
